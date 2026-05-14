@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>BenessereAttivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--navbar-->
+<div class="fixed-navbar">
+    <div class="nav-container">
+        <div class="logo">BenessereAttivo</div>
+        <div class="nav-links">
+            <a href="#educazione">Educazione</a>
+            <a href="#calcolatori">Calcolatori</a>
+            <a href="#timer">Timer</a>
+            <a href="#profilo">Profilo</a>
+            <a href="#" id="toggleThemeBtn" class="btn-book-nav">Tema</a>
+        </div>
+    </div>
+</div>
+
+<!--benessere attivo - home -->
+<div class="container">
+    <div class="hero-wrapper">
+        <div class="hero-overlay">
+            <div class="hero">
+                <div class="titleBenssere">BENESSERE<br><span>a t t i v o</span></div>
+                <div style="margin: 24px 0 16px;" id="educazione">
+                    <a href="#calcolatori" class="btn-primary">Inizia il tuo percorso</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--impara il benessere-->
+    <section>
+        <div class="section">
+            <h2 class="section-title">Impara il Benessere</h2>
+            <p class="section-sub">Approfondisci le migliori pratiche per il tuo benessere psico-fisico e la cittadinanza attiva nella salute.</p>
+            <div class="filtri-impara">
+                <button class="btn-filtro attivo" data-categoria="nutrizione">Nutrizione</button>
+                <button class="btn-filtro" data-categoria="esercizio">Esercizio</button>
+                <button class="btn-filtro" data-categoria="salute-mentale">Salute Mentale</button>
+                <button class="btn-filtro" data-categoria="prevenzione">Prevenzione</button>
+            </div>
+            <div id="articles-container" style="margin-top: 2rem;"></div>
+        </div>
+    </section>
+
+    <!-- consiglio del giorno che chiama l'API adviceslip.com (con fetch e async/await)-->
+    <section id="consiglio">
+        <div class="section">
+            <h2 class="section-title">Consiglio del giorno</h2>
+            <div class="contact-section" style="text-align: center;">
+                <div id="quoteContainer" class="message" style="font-size: 1.2rem; font-style: italic; margin-bottom: 20px;">
+                    Caricamento in corso...
+                </div>
+                <button id="btnNuovoConsiglio" class="send-btn">Nuovo consiglio</button>
+            </div>
+        </div>
+    </section>
+
+    <!--Calcolatore IMC + fabbisogno calorico-->
+    <section id="calcolatori">
+        <div class="section">
+            <h2 class="section-title">Calocalatori IMC + fabbisogno calorico</h2>
+            <div class="contact-section">
+                <div class="form-heading">Calcola il tuo IMC</div>
+                <p style="margin-bottom: 8px; font-size: 1.1rem;">Inserisci i tuoi dati per conoscere il tuo Indice di Massa Corporea.</p>
+                <div>
+                    <div class="form-group"><input type="text" placeholder="Nome:" id="nomeIMC"></div>
+                    <div class="form-group"><input type="number" placeholder="Età:" id="etaIMC"></div>
+                    <div class="form-group"><input type="number" placeholder="Altezza (cm):" id="altezzaIMC"></div>
+                    <div class="form-group"><input type="number" placeholder="Peso (kg):" id="pesoIMC"></div>
+                    <button class="send-btn" id="calcolaIMC">Calcola IMC</button>
+                    <div id="risultatoIMC" class="message" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="contact-section">
+                <div class="form-heading">Calcola il tuo fabbisogno calorico (Harris-Benedict)</div>
+                <p style="margin-bottom: 8px; font-size: 1.1rem;">Scopri quante calorie consumi giornalmente.</p>
+                <div>
+                    <p>Sesso:</p>
+                    <div class="form-group-radio">
+                        <label><input type="radio" name="sesso" value="uomo" checked> Uomo</label>
+                        <label><input type="radio" name="sesso" value="donna"> Donna</label>
+                    </div>
+                    <div class="form-group"><input type="number" placeholder="Età:" id="etaFB"></div>
+                    <div class="form-group"><input type="number" placeholder="Altezza (cm):" id="altezzaFB"></div>
+                    <div class="form-group"><input type="number" placeholder="Peso (kg):" id="pesoFB"></div>
+                    <div class="form-group">
+                        <label for="livelloAttivita">Livello di attività fisica</label>
+                        <select id="livelloAttivita">
+                            <option value="1.2">Sedentario</option>
+                            <option value="1.375" selected>Leggero (1-3 gg/sett)</option>
+                            <option value="1.55">Moderato (3-5 gg/sett)</option>
+                            <option value="1.725">Attivo (6-7 gg/sett)</option>
+                            <option value="1.9">Molto attivo</option>
+                        </select>
+                    </div>
+                    <button class="send-btn" id="calcolaFB">Calcola fabbisogno</button>
+                    <div id="risultatoFabbisogno" class="message" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--timer-->
+    <section id="timer">
+        <div class="section">
+            <h2 class="section-title">Timer sessione</h2>
+            <div class="contact-section">
+                <div class="form-heading">Gestione workout</div>
+                <div class="timer-controls">
+                    <label>Minuti:</label>
+                    <input type="number" id="timerMinuti" min="1" max="60" value="5">
+                    <button id="btnAvviaTimer" class="timer-btn">▶ Avvia</button>
+                    <button id="btnFermaTimer" class="timer-btn">⏹ Ferma</button>
+                    <button id="btnReimpostaTimer" class="timer-btn">⟳ Reimposta</button>
+                </div>
+                <div id="timerDisplay" class="timer-display">05:00</div>
+                <div id="timerMessaggio" class="message" style="margin-top: 1rem; display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!--profili storico + diario-->
+    <section id="profilo">
+        <div class="section">
+            <h2 class="section-title">Il tuo profilo benessere</h2>
+            <div class="contact-section">
+                <div class="form-heading">Storico misurazioni IMC</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 1rem;">
+                    <span id="contatoreStorico">0 misurazioni salvate</span>
+                    <button id="btnPulisciStorico" class="send-btn" style="padding: 6px 16px;">🗑 Pulisci storico</button>
+                </div>
+                <ul id="listaStorico" class="lista-storico"></ul>
+            </div>
+            <div class="contact-section">
+                <div class="form-heading">Diario attività fisica</div>
+                <p style="margin-bottom: 8px; font-size: 1.1rem;">Tieni traccia delle tue sessioni di allenamento.</p>
+                <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                    <input type="text" id="inputAttivita" placeholder="Es. Corsa 30 min – 5 km" style="flex:1; padding: 10px; border-radius: 60px; background: var(--input-bg); border:1px solid var(--border-color); color: var(--text-primary);">
+                    <button id="btnAggiungiAttivita" class="send-btn">Aggiungi</button>
+                </div>
+                <ul id="listaAttivita" class="lista-storico"></ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
